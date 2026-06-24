@@ -377,7 +377,20 @@
 </style>
 </head>
 <body>
-
+<script>
+  (function() {
+    var correct = "ncstudynotebook2026";
+    var stored = localStorage.getItem("nc_access");
+    if (stored !== correct) {
+      var attempt = prompt("Enter your access password:");
+      if (attempt !== correct) {
+        document.body.innerHTML = "<p style='font-family:sans-serif;padding:2rem;'>Incorrect password. Please contact your coach.</p>";
+        return;
+      }
+      localStorage.setItem("nc_access", correct);
+    }
+  })();
+</script>
 <div class="page">
 
   <!-- Header -->
