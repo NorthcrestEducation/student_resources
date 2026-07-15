@@ -233,6 +233,105 @@
       transform: translateX(3px);
     }
 
+    /* ── Challenges Section ── */
+    .challenges-section {
+      background: var(--primary);
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 3rem;
+      padding: 2.5rem 2rem;
+    }
+
+    .challenges-header {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-align: center;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .challenge-card {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+    }
+
+    .challenge-number {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-style: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      flex-shrink: 0;
+    }
+
+    .challenge-name {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .challenge-benefit {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.775rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .challenge-link {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--primary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.18s;
+      align-self: flex-start;
+    }
+
+    .challenge-link:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .challenges-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ── Enrollment Notice ── */
     .enrollment-notice {
       margin-top: 3rem;
@@ -408,6 +507,35 @@
 
     </div>
   </section>
+
+  <!-- ── Challenges Section ── -->
+  <div class="challenges-section">
+    <p class="challenges-header">Challenges</p>
+    <div class="challenges-grid">
+
+      <div class="challenge-card">
+        <p class="challenge-number">1</p>
+        <p class="challenge-name">The Launch Challenge</p>
+        <p class="challenge-benefit">Your first chance to prove how fast real progress can happen once the right approach is in place.</p>
+        <a class="challenge-link" href="[PDF LINK PLACEHOLDER]" target="_blank">View Challenge &rarr;</a>
+      </div>
+
+      <div class="challenge-card">
+        <p class="challenge-number">2</p>
+        <p class="challenge-name">The Ceiling Test</p>
+        <p class="challenge-benefit">A rare look at your true scoring potential once pressure is no longer part of the equation.</p>
+        <a class="challenge-link" href="[PDF LINK PLACEHOLDER]" target="_blank">View Challenge &rarr;</a>
+      </div>
+
+      <div class="challenge-card">
+        <p class="challenge-number">3</p>
+        <p class="challenge-name">The Sharpshooter Challenge</p>
+        <p class="challenge-benefit">Prove you can hold your accuracy under real pressure, with even less time than test day allows.</p>
+        <a class="challenge-link" href="[PDF LINK PLACEHOLDER]" target="_blank">View Challenge &rarr;</a>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ── Enrollment Notice ── -->
   <div class="enrollment-notice">
