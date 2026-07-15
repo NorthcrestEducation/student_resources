@@ -267,9 +267,11 @@
     }
 
     .challenges-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: 724px;
+      margin: 0 auto;
     }
 
     .challenge-card {
