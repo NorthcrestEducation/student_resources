@@ -378,22 +378,161 @@
       opacity: 0.6;
       letter-spacing: 0.05em;
     }
+
+    /* ── Password Gate Overlay ── */
+    #pw-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #pw-gate.hidden {
+      display: none;
+    }
+
+    .pw-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.75rem 2.5rem 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 32px rgba(42, 35, 24, 0.1);
+    }
+
+    .pw-logo {
+      width: 72px;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .pw-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .pw-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .pw-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--accent);
+      border: none;
+      margin: 0 auto 2rem;
+    }
+
+    .pw-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      outline: none;
+      transition: border-color 0.18s;
+      margin-bottom: 0.75rem;
+    }
+
+    .pw-input:focus {
+      border-color: var(--accent);
+    }
+
+    .pw-input.error {
+      border-color: var(--primary);
+    }
+
+    .pw-error {
+      font-size: 0.75rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      min-height: 1.1em;
+      display: none;
+    }
+
+    .pw-error.visible {
+      display: block;
+    }
+
+    .pw-btn {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--primary);
+      color: var(--bg);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+
+    .pw-btn:hover {
+      background: #8a1320;
+    }
   </style>
 </head>
 <body>
 
+<!-- Password gate overlay — rendered before page content, cannot be bypassed -->
+<div id="pw-gate">
+  <div class="pw-box">
+    <img src="favicon.svg" alt="Northcrest Education" class="pw-logo" />
+    <div class="pw-title">Student Resource Hub</div>
+    <div class="pw-subtitle">Northcrest Education</div>
+    <hr class="pw-divider" />
+    <input id="pw-input" class="pw-input" type="password" placeholder="Enter access password" autocomplete="off" />
+    <div id="pw-error" class="pw-error">Incorrect password. Please contact your coach.</div>
+    <button class="pw-btn" onclick="checkPassword()">Unlock</button>
+  </div>
+</div>
+
 <script>
   (function() {
     var correct = "northcrestresourcehub";
-    var stored = localStorage.getItem("nc_access");
-    if (stored !== correct) {
-      var attempt = prompt("Enter your access password:");
-      if (attempt !== correct) {
-        document.body.innerHTML = "<p style='font-family:sans-serif;padding:2rem;'>Incorrect password. Please contact your coach.</p>";
-        return;
-      }
-      localStorage.setItem("nc_access", correct);
+
+    // Unlock immediately if valid password already stored
+    if (localStorage.getItem("nc_access") === correct) {
+      document.getElementById("pw-gate").classList.add("hidden");
     }
+
+    window.checkPassword = function() {
+      var input = document.getElementById("pw-input");
+      var error = document.getElementById("pw-error");
+      if (input.value === correct) {
+        localStorage.setItem("nc_access", correct);
+        document.getElementById("pw-gate").classList.add("hidden");
+      } else {
+        input.classList.add("error");
+        error.classList.add("visible");
+        input.value = "";
+        input.focus();
+      }
+    };
+
+    // Allow submitting with Enter key
+    document.getElementById("pw-input").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") checkPassword();
+    });
   })();
 </script>
 
